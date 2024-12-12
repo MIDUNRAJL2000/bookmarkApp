@@ -32,10 +32,16 @@ const page = () => {
                 <div className='space-y-2 mb-4'>
                     <label htmlFor='email' className='block text-sm font-medium'>Email</label>
                     <Input id='email' placeholder='Enter ur email' name='email' className='w-full max-w-xs' />
+                    <div id='email-error' aria-live='polite' aria-atomic='true'>
+                        <p className='mt-2 text-sm text-red-500'>{state?.Error?.email}</p>
+                    </div>
                 </div>
                 <div className='space-y-2 mb-4'>
                     <label htmlFor='image' className='block text-sm font-medium'>Image</label>
                     <Input id='image' placeholder='Enter url' name='image' className='w-full max-w-xs' />
+                    <div id='image-error' aria-live='polite' aria-atomic='true'>
+                        <p className='mt-2 text-sm text-red-500'>{state?.Error?.image}</p>
+                    </div>
                 </div>
                
                 <Button type='submit' className=' mt-3'>Submit</Button>
