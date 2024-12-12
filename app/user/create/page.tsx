@@ -2,11 +2,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { saveUser } from '@/lib/action'
 import React from 'react'
 import { useFormState } from 'react-dom'
 
 const page = () => {
-    const [isState, formAction] = useFormState();
+    const [state, formAction] = useFormState(saveUser, null);
   return (
     <div>
     <div className="flex items-center mt-5 justify-center gap-2">
@@ -24,6 +25,9 @@ const page = () => {
                 <div className='space-y-2 mb-4'>
                     <label htmlFor='name' className='block text-sm font-medium'>Name</label>
                     <Input id='name' placeholder='Enter ur name' name='name' className='w-full max-w-xs' />
+                    <div id='name-error' aria-live='polite' aria-atomic='true'>
+                        <p className='mt-2 text-sm text-red-500'>{state?.Error?.name}</p>
+                    </div>
                 </div>
                 <div className='space-y-2 mb-4'>
                     <label htmlFor='email' className='block text-sm font-medium'>Email</label>
