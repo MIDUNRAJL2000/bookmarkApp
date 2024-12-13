@@ -26,7 +26,7 @@ const BookmarksLanding = () => {
    <p className="text-xl mb-10 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">
        Effortlessly save, organize, and share your favorite web resources with intelligent bookmark management.
    </p>
-  <Link href="/auth/signup">
+  <Link href="/user/create">
   <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg flex items-center mx-auto space-x-2 px-8 py-6 text-lg transition-all">
     <span>Get Started</span>
     <ArrowRightIcon className="h-5 w-5" />

@@ -13,11 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
- model User { 
+ model Bookmark { 
   id            String      @id @default(cuid()) 
-  name          String? 
-  email         String?     @unique 
-  emailVerified DateTime? 
-  image         String? 
+  title         String
+  description         String     @unique 
+  imageUrl        String
  
 }

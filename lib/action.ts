@@ -1,14 +1,17 @@
+"use server"
 import { revalidatePath } from 'next/cache';
+import { prisma} from "@/lib/prisma";
 import { redirect } from 'next/navigation';
 import {z} from 'zod'
 
 const EmployeeSchema = z.object({
-    name: z.string().min(6, {message: 'Name is required'}),
-    email: z.string().min(6,{message: 'Invalid email address'}),
-    image: z.string().min(20, {message: 'Invalid URL'}),
+    title: z.string().min(6, {message: 'Name is required'}),
+    description: z.string().min(6,{message: 'Invalid email address'}),
+    image: z.string().min(2, {message: 'Invalid URL'}),
 });
 
-export const saveUser = async(prevState: any, formData: FormData) => {
+export const saveBookmark = async(prevState: any, formData: FormData) => {
+ 
     const validatedFields = EmployeeSchema.safeParse(
    Object.fromEntries(formData.entries())
     );
@@ -18,9 +21,20 @@ export const saveUser = async(prevState: any, formData: FormData) => {
             Error: validatedFields.error.flatten().fieldErrors,
         }
     }
+ 
 
-    try{}
+    try{
+        await prisma.Bookmark.create({
+            data: {
+                title: validatedFields.data.title,
+                description: validatedFields.data.description,
+                imageUrl: validatedFields.data.image,
+            },
+        });
+    }
+    
     catch (error) {
+        console.log(error)
         return {
             message: 'Database Error: Failed to Create User'
         }
