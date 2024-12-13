@@ -9,9 +9,16 @@ import {
   } from "@/components/ui/table"
   
 import Link from 'next/link'
+import { getBookmarkList } from '@/lib/action';
+import { DeleteButton } from "@/component/Delete";
 import React from 'react'
 
-const page = () => {
+const page = async({
+  query
+}: {
+  query: string
+}) => {
+  const bookmarks = await getBookmarkList(query);
   return (
     <div className='w-screen py-20 flex justify-center flex-col items-center'>
         <div className='flex justify-between items-center gap-1 mb-5'>
@@ -30,15 +37,27 @@ const page = () => {
       <TableHead>Title</TableHead>
       <TableHead>Description</TableHead>
       <TableHead>Image Url</TableHead>
+      <TableHead>Action</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
-    <TableRow>
-      <TableCell className="font-medium">1</TableCell>
-      <TableCell>Hunger Games</TableCell>
-      <TableCell>The Hunger games series</TableCell>
-      <TableCell>https://images.app.goo.gl/82zBW85F2j8SLd9u5</TableCell>
-    </TableRow>
+    {bookmarks.map((rs, index) => {
+       <TableRow key={rs.id}>
+        <TableCell className="font-medium">{index + 1}</TableCell>
+        <TableCell>{rs.title}</TableCell>
+        <TableCell>{rs.description}</TableCell>
+        <TableCell>{rs.imageUrl}</TableCell>
+        <TableCell className="flex justify-center gap-1 py-3">
+          <Link href={`/user/edit/${rs.id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Edit 
+          </Link>
+          <DeleteButton id={rs.id}/>
+          </TableCell>
+      </TableRow>
+
+    })}
+   
+    
   </TableBody>
 </Table>
 
