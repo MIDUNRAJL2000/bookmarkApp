@@ -24,7 +24,7 @@ export const saveBookmark = async(prevState: any, formData: FormData) => {
  
 
     try{
-        await prisma.Bookmark.create({
+        await prisma.bookmark.create({
             data: {
                 title: validatedFields.data.title,
                 description: validatedFields.data.description,
@@ -45,7 +45,7 @@ export const saveBookmark = async(prevState: any, formData: FormData) => {
 
 export const getBookmarkList = async (query: string) =>{
     try{
-        const bookmarks = await prisma.Bookmark.findMany({
+        const bookmarks = await prisma.bookmark.findMany({
             select: {
                 id: true,
                 title: true,
@@ -61,7 +61,7 @@ export const getBookmarkList = async (query: string) =>{
 
 export const updateBookmarkById = async (id: string) => {
     try{
-        const bookmark = await prisma.Bookmark.findUnique({
+        const bookmark = await prisma.bookmark.findUnique({
             where: {
                 id: id,
             },
@@ -74,7 +74,7 @@ export const updateBookmarkById = async (id: string) => {
 
 export const updateBookmark = async(
     id: string,
-    prevState: any,
+    _prevState: any,
     formData: FormData
 ) => {
     const validatedFields = BookmarkSchema.safeParse(
@@ -86,7 +86,7 @@ export const updateBookmark = async(
         }
     }
     try{
-        await prisma.Bookmark.update({
+        await prisma.bookmark.update({
             where: {
                 id: id,
             },
@@ -106,7 +106,7 @@ export const updateBookmark = async(
 
 export const deleteBookmark = async (id: string) => {
     try {
-      await prisma.Bookmark.delete({
+      await prisma.bookmark.delete({
         where: { id },
       });
     } catch (error) {

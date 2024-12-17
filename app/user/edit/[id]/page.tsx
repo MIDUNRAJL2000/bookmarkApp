@@ -11,10 +11,10 @@ const UpdateBookmark = async ({ params }: { params: { id: string } }) => {
     }
 
     return(
-        <div className="max-w-md mx-auto mt-5">
-            <h1 className="text-2xl text-center mb-2">Update Employee</h1>
+        <div className="py-16">
             <EditForm bookmark={bookmark} />
             </div>
     )
    
-        }
+        };
+        export default UpdateBookmark;
