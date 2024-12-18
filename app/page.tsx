@@ -11,7 +11,7 @@ const BookmarksLanding = () => {
             <BookmarkIcon className="h-6 w-6 text-[#4A6CF7]" />
             <span className="text-2xl font-bold text-[#1D2B4F]">EasyMark</span>
           </div>
-          <Link href="/auth/signin">
+          <Link href="/sign-in">
             <Button  className="bg-[#4A6CF7] hover:bg-[#3A5BD7] text-white w-[120px] ml-5">Sign In</Button>
           </Link>
         </div>
