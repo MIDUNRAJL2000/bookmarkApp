@@ -25,8 +25,8 @@ const formSchema = z
   });
 
 const SignUpForm = () => {
-    const form = useForm<z.infer<typeof FormSchema>>({
-        resolver: zodResolver(FormSchema),
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
         defaultValues: {
           username: '',
           email: '',
@@ -100,7 +100,6 @@ const SignUpForm = () => {
 
         <Button className='w-full' type="submit">Sign up</Button>
 
-        {/* Divider */}
         <div className="flex items-center justify-center">
             <div className="flex-1 border-t border-gray-300"></div>
             <span className="mx-3 text-gray-500 text-sm">or</span>
