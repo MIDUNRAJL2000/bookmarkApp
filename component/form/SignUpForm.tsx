@@ -8,6 +8,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from "zod"
 import GoogleSignInButton from '../GoogleSignInButton'
+import { useRouter } from 'next/navigation'
+import { useToast } from '@/hooks/use-toast'
 
 const formSchema = z
   .object({
@@ -25,6 +27,8 @@ const formSchema = z
   });
 
 const SignUpForm = () => {
+    const router = useRouter()
+    const toast = useToast()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -35,8 +39,28 @@ const SignUpForm = () => {
         },
       });
 
-    const onSubmit = (values: z.infer<typeof formSchema> ) => {
-        console.log(values)
+    const onSubmit = async (values: z.infer<typeof formSchema> ) => {
+        const response = await fetch('/api/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: values.username,
+                email: values.email,
+                password: values.password,
+            })
+        })
+
+        if(response.ok){
+            router.push('/sign-in')
+        } else{
+            toast({
+                title: 'Error',
+                description: "Oops! Something went wrong. Please try again.",
+                variant: 'destructive',
+            })
+        }
     };
 
   return (

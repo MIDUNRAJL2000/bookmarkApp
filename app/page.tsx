@@ -1,8 +1,12 @@
 import { BookmarkIcon, ListChecksIcon, SearchIcon, ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import UserAccountnav from '@/component/UserAccountnav';
 
-const BookmarksLanding = () => {
+const BookmarksLanding = async () => {
+  const session = await getServerSession(authOptions);
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 font-['Inter']">
       <header className="border-b bg-white dark:bg-gray-800 shadow-sm">
@@ -11,9 +15,16 @@ const BookmarksLanding = () => {
             <BookmarkIcon className="h-6 w-6 text-[#4A6CF7]" />
             <span className="text-2xl font-bold text-[#1D2B4F]">EasyMark</span>
           </div>
-          <Link href="/sign-in">
+          {/* <Link href="/sign-in">
             <Button  className="bg-[#4A6CF7] hover:bg-[#3A5BD7] text-white w-[120px] ml-5">Sign In</Button>
-          </Link>
+          </Link> */}
+          {session ?. user ? (
+            <UserAccountnav />
+          ) : (
+            <Link className={buttonVariants()} href="/sign-in">
+              Sign In
+              </Link>
+          )}
         </div>
       </header>
 

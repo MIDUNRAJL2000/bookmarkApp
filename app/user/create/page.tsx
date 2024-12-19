@@ -62,18 +62,18 @@ const CreateBookmarkPage = () => {
                             </div>
 
                             <div className="space-y-2">
-                                <label htmlFor='imageUrl' className="block text-sm font-medium text-[#1D2B4F] dark:text-white">
-                                    Image URL
+                                <label htmlFor='Url' className="block text-sm font-medium text-[#1D2B4F] dark:text-white">
+                                     URL
                                 </label>
                                 <Input 
-                                    id='imageUrl' 
-                                    name='imageUrl' 
-                                    placeholder='Enter image URL' 
+                                    id='Url' 
+                                    name='Url' 
+                                    placeholder='Enter the URL' 
                                     className="w-full bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-[#4A6CF7] focus:border-[#4A6CF7]" 
                                 />
-                                {state?.Error?.imageUrl && (
+                                {state?.Error?.Url && (
                                     <p className="mt-2 text-sm text-red-500">
-                                        {state.Error.imageUrl}
+                                        {state.Error.Url}
                                     </p>
                                 )}
                             </div>
