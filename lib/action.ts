@@ -26,17 +26,17 @@ export const saveBookmark = async(_prevState: any, formData: FormData) => {
  
 
     try{
-    //     const session = await getServerSession(authOptions);
-    // if (!session?.user?.id) {
-    //   return { message: "User not authenticated." };
-    // }
-    // console.log('session', session);
+        const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return { message: "User not authenticated." };
+    }
+    console.log('session', session);
         await db.bookmark.create({
             data: {          
                 title: validatedFields.data.title,
                 description: validatedFields.data.description,
                 Url: validatedFields.data.Url,
-                userId: '123',
+                userId: session.user.id,
             },
         });
     }
@@ -52,7 +52,14 @@ export const saveBookmark = async(_prevState: any, formData: FormData) => {
 
 export const getBookmarkList = async (_query: string) =>{
     try{
+        const session = await getServerSession(authOptions);
+        if (!session?.user?.id) {
+          return { message: "User not authenticated." };
+        }
         const bookmarks = await db.bookmark.findMany({
+            where: {
+                userId: session.user.id,
+            },
             select: {
                 id: true,
                 title: true,

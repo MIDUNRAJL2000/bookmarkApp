@@ -7,6 +7,7 @@ import UserAccountnav from '@/component/UserAccountnav';
 
 const BookmarksLanding = async () => {
   const session = await getServerSession(authOptions);
+  console.log('session', session);
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 font-['Inter']">
       <header className="border-b bg-white dark:bg-gray-800 shadow-sm">
