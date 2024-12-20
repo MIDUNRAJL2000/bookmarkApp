@@ -54,7 +54,6 @@ const SignInForm = () => {
   return (
     <Form {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-md mx-auto p-4 space-y-6">
-        {/* Email Field */}
         <FormField
             control={form.control}
             name="email"
@@ -69,7 +68,6 @@ const SignInForm = () => {
             )}
         />
         
-        {/* Password Field */}
         <FormField
             control={form.control}
             name="password"
@@ -84,10 +82,8 @@ const SignInForm = () => {
             )}
         />
 
-        {/* Sign In Button */}
         <Button className='w-full' type="submit">Sign in</Button>
 
-        {/* Divider */}
         <div className="flex items-center justify-center">
             <div className="flex-1 border-t border-gray-300"></div>
             <span className="mx-3 text-gray-500 text-sm">or</span>
